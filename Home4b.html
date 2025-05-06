@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservasi Ruangan</title>
+    <style>
+        :root {
+            --warna-utama: #3f51b5;
+            --tombol-hover: #212f82;
+        }
+        body {
+            background-color: #f5f7fa;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+
+            /* overflow: hidden; */
+            height: 100vh;
+        }
+
+        nav {
+            background-color: var(--warna-utama);
+            color: white;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .left, nav .right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+
+            font-size: 18px;
+        }
+
+        nav a {
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        nav button {
+            background-color: #6574c4;
+            border: none;
+            padding: 10px 40px;
+            border-radius: 9999px;
+            color: white;
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        nav button:hover {
+            background-color: var(--tombol-hover);
+        }
+
+        .container {
+            padding: 24px;
+            /* height: 100vh; /* MENYEBABKAN TINGGI BAGIAN CONTAINER SETINGGI LAYAR (NAVBAR BELUM DIHITUNG) */
+            box-sizing: border-box; /* supaya padding tetap dihitung di dalam tinggi */
+
+            /* overflow: hidden; */
+
+            /*display: flex;
+            /*align-items: center; /* tengah vertikal */
+            /*justify-content: center; /* tengah horizontal kalau mau */
+        }
+
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            /* flex: 1;
+            height: 100%;
+            max-height: 100%;
+            overflow: auto; */
+        }
+
+        @media (min-width: 1024px) {
+            .content {
+                flex-direction: row;
+            }
+        }
+
+        .filter, .rooms {
+            width: 100%;
+
+            /* display: flex;
+            flex-direction: column;
+            flex-grow: 1; */
+        }
+
+        @media (min-width: 1024px) {
+            .filter {
+                width: 33.3333%;
+            }
+
+            .rooms {
+                width: 66.6666%;
+            }
+        }
+
+        .filter {
+            background-color: #f0f1f3;
+            padding: 24px;
+            border-radius: 8px;
+
+            /*flex-grow: 1; /* biar bisa meluas */
+            box-sizing: border-box; /* padding tidak bikin overflow */
+
+            /* height: 100vh; /* tinggi layar penuh */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter h2, .rooms h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .filter form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            
+            /* untuk device beda */
+            justify-content: space-between; /* atau space-evenly */
+            flex: 1; /* biar ngisi tinggi parent */
+        }
+
+        .filter label {
+            font-size: 14px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .filter input, .filter select {
+            width: 100%;
+            padding: 16px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            box-sizing: border-box; /* tambahkan ini agar padding tidak menambah ukuran */
+            appearance: none;        /* untuk menghindari perbedaan tampilan bawaan browser */
+            
+            font-size: 14px;
+        }
+
+        .filter button {
+            background-color: var(--warna-utama);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        .filter button:hover {
+            background-color: var(--tombol-hover);
+        }
+
+
+        /* ================================sebelah kanan============== */
+        .room-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            overflow-y: auto; /* aktifkan scroll */
+            max-height: 600px; /* batasi tinggi agar bisa discroll */
+            scroll-behavior: smooth;
+            padding-right: 10px; /* biar scrollbar gak nutup konten */
+            overflow-x: hidden;
+        }
+
+        .room-list::-webkit-scrollbar {
+            width: 8px; /* Scrollbar vertikal sekarang */
+        }
+
+        .room-list::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .room-list::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .room-list::-webkit-scrollbar-track {
+            background-color: #f0f0f0;
+        }
+
+        .room-card {
+            display: flex;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .room-card .room-number {
+            width: 25%;
+            background-color: #dbeafe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--warna-utama);
+        }
+
+        .room-card .room-info {
+            width: 75%;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .room-info p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        .room-info button {
+            background-color: var(--warna-utama);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .room-info button:hover {
+            background-color: var(--tombol-hover);
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="left">
+            <!-- <img src="unsrii.png" alt="Logo" style="width: 40px; height: 40px;"> -->
+            <a href="#">SIRESA - Detail Ruangan</a>
+        </div>
+        <div class="right">
+            <a href="#">Home</a>
+            <a href="JadwalRuangan.html">Kalender</a>
+            <button>Wahyu Trisno Aji</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <!-- Filter Pencarian -->
+            <div class="filter">
+                <h2>Filter Pencarian</h2>
+                <form>
+                    <div>
+                        <label>Tanggal</label>
+                        <input type="date" value="2025-06-03">
+                    </div>
+                    <div>
+                        <label>Waktu Mulai</label>
+                        <input type="time" value="08:00">
+                    </div>
+                    <div>
+                        <label>Waktu Selesai</label>
+                        <input type="time" value="10:00">
+                    </div>
+                    <div>
+                        <label>Gedung</label>
+                        <select>
+                            <option>Semua Gedung</option>
+                            <option>Gedung A</option>
+                            <option>Gedung B</option>
+                            <option>Gedung C</option>
+                            <option>Gedung D</option>
+                            <option>Gedung E</option>
+                            <option>Gedung F</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Kapasitas Min.</label>
+                        <input type="number" placeholder="30 orang">
+                    </div>
+                    <button>Cari Ruangan</button>
+                </form>
+            </div>
+
+            <!-- Ruangan Tersedia -->
+            <div class="rooms">
+                <h2>Ruangan Tersedia (6)</h2>
+                <div class="room-list">
+
+                    <div class="room-card">
+                        <div class="room-number">101</div>
+                        <div class="room-info">
+                        <div>
+                            <p><strong>Ruang 101 - Gedung A</strong></p>
+                            <p>Kapasitas: 40 orang</p>
+                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
+                        </div>
+                        <a href="DetailRuangan.html"><button>Pilih</button></a>
+                        </div>
+                    </div>
+
+                    <!-- Duplikat card jika diperlukan -->
+                    <div class="room-card">
+                        <div class="room-number">101</div>
+                        <div class="room-info">
+                        <div>
+                            <p><strong>Ruang 101 - Gedung A</strong></p>
+                            <p>Kapasitas: 40 orang</p>
+                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
+                        </div>
+                        <button>Pilih</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card">
+                        <div class="room-number">101</div>
+                        <div class="room-info">
+                        <div>
+                            <p><strong>Ruang 101 - Gedung A</strong></p>
+                            <p>Kapasitas: 40 orang</p>
+                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
+                        </div>
+                        <button>Pilih</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card">
+                        <div class="room-number">101</div>
+                        <div class="room-info">
+                        <div>
+                            <p><strong>Ruang 101 - Gedung A</strong></p>
+                            <p>Kapasitas: 40 orang</p>
+                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
+                        </div>
+                        <button>Pilih</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card">
+                        <div class="room-number">101</div>
+                        <div class="room-info">
+                        <div>
+                            <p><strong>Ruang 101 - Gedung A</strong></p>
+                            <p>Kapasitas: 40 orang</p>
+                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
+                        </div>
+                        <button>Pilih</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card">
+                        <div class="room-number">101</div>
+                        <div class="room-info">
+                        <div>
+                            <p><strong>Ruang 101 - Gedung A</strong></p>
+                            <p>Kapasitas: 40 orang</p>
+                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
+                        </div>
+                        <button>Pilih</button>
+                        </div>
+                    </div>
+
+                    <div class="room-card">
+                        <div class="room-number">101</div>
+                        <div class="room-info">
+                        <div>
+                            <p><strong>Ruang 101 - Gedung A</strong></p>
+                            <p>Kapasitas: 40 orang</p>
+                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
+                        </div>
+                        <button>Pilih</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+</html>

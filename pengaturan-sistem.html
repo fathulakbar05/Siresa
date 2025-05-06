@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>SIRESA - Pengaturan Sistem</title>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <div class="w-64 bg-gray-800 text-white">
+        <div class="p-6 bg-gray-900">
+          <h1 class="text-xl font-bold">SIRESA - Admin Dashboard</h1>
+        </div>
+        <nav class="mt-6">
+          <a
+            href="dashboard.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="permintaan-reservasi.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Permintaan Reservasi</span>
+          </a>
+          <a
+            href="kelola-ruangan.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Kelola Ruangan</span>
+          </a>
+          <a
+            href="laporan-statistik.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Laporan & Statistik</span>
+          </a>
+          <a
+            href="pengaturan-sistem.html"
+            class="flex items-center px-6 py-4 bg-blue-600 text-white"
+          >
+            <span>Pengaturan Sistem</span>
+          </a>
+          <a
+            href="manajemen-pengguna.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Manajemen Pengguna</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="flex-1 overflow-y-auto">
+        <!-- Header -->
+        <header
+          class="bg-gray-800 text-white py-4 px-6 flex justify-between items-center"
+        >
+          <h1 class="text-xl font-bold">SIRESA - Pengaturan Sistem</h1>
+          <div>
+            <button
+              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-full"
+            >
+              Admin
+            </button>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="p-6">
+          <!-- Tab Navigation -->
+          <div class="bg-white rounded-lg shadow-md mb-6">
+            <div class="border-b">
+              <nav class="flex -mb-px">
+                <a
+                  href="#"
+                  class="py-4 px-6 border-b-2 border-blue-500 text-blue-600 font-medium"
+                >
+                  Umum
+                </a>
+                <a
+                  href="#"
+                  class="py-4 px-6 text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Notifikasi
+                </a>
+                <a
+                  href="#"
+                  class="py-4 px-6 text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Keamanan
+                </a>
+                <a
+                  href="#"
+                  class="py-4 px-6 text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Integrasi
+                </a>
+                <a
+                  href="#"
+                  class="py-4 px-6 text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Backup & Restore
+                </a>
+              </nav>
+            </div>
+          </div>
+
+          <!-- General Settings -->
+          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-bold mb-6">Pengaturan Umum</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Nama Sistem</label
+                >
+                <input
+                  type="text"
+                  value="SIRESA - Sistem Reservasi Ruangan"
+                  class="w-full border rounded px-3 py-2"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Logo</label
+                >
+                <div class="flex items-center">
+                  <div class="w-12 h-12 bg-gray-200 rounded-md mr-4"></div>
+                  <button
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                  >
+                    Ganti Logo
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Zona Waktu</label
+                >
+                <select class="w-full border rounded px-3 py-2">
+                  <option>Asia/Jakarta (GMT+7)</option>
+                  <option>Asia/Makassar (GMT+8)</option>
+                  <option>Asia/Jayapura (GMT+9)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Format Tanggal</label
+                >
+                <select class="w-full border rounded px-3 py-2">
+                  <option>DD/MM/YYYY</option>
+                  <option>MM/DD/YYYY</option>
+                  <option>YYYY-MM-DD</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Waktu Buka</label
+                >
+                <input
+                  type="time"
+                  value="07:00"
+                  class="w-full border rounded px-3 py-2"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Waktu Tutup</label
+                >
+                <input
+                  type="time"
+                  value="20:00"
+                  class="w-full border rounded px-3 py-2"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Durasi Minimum Reservasi (menit)</label
+                >
+                <input
+                  type="number"
+                  value="30"
+                  class="w-full border rounded px-3 py-2"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Durasi Maksimum Reservasi (jam)</label
+                >
+                <input
+                  type="number"
+                  value="4"
+                  class="w-full border rounded px-3 py-2"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Approval Settings -->
+          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-bold mb-6">Pengaturan Persetujuan</h2>
+
+            <div class="mb-4">
+              <label class="flex items-center">
+                <input
+                  type="checkbox"
+                  class="rounded text-blue-600 mr-2"
+                  checked
+                />
+                <span class="text-sm font-medium text-gray-700"
+                  >Aktifkan persetujuan otomatis untuk ruangan tertentu</span
+                >
+              </label>
+            </div>
+
+            <div class="mb-4">
+              <label class="flex items-center">
+                <input
+                  type="checkbox"
+                  class="rounded text-blue-600 mr-2"
+                  checked
+                />
+                <span class="text-sm font-medium text-gray-700"
+                  >Aktifkan notifikasi email untuk status permintaan</span
+                >
+              </label>
+            </div>
+
+            <div class="mb-4">
+              <label class="flex items-center">
+                <input type="checkbox" class="rounded text-blue-600 mr-2" />
+                <span class="text-sm font-medium text-gray-700"
+                  >Aktifkan persetujuan berjenjang untuk ruangan khusus</span
+                >
+              </label>
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Tampilkan alasan penolakan kepada peminjam</label
+              >
+              <select class="w-full border rounded px-3 py-2">
+                <option>Ya, selalu</option>
+                <option>Ya, untuk permintaan fakultas</option>
+                <option>Tidak</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <div class="flex justify-end">
+            <button
+              class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-medium"
+            >
+              Simpan Pengaturan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

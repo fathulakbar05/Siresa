@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIRESA - Permintaan Reservasi</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <div class="w-64 bg-gray-800 text-white">
+        <div class="p-6 bg-gray-900">
+          <h1 class="text-xl font-bold">SIRESA - Admin Dashboard</h1>
+        </div>
+        <nav class="mt-6">
+          <a
+            href="dashboard.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="permintaan-reservasi.html"
+            class="flex items-center px-6 py-4 bg-blue-600 text-white"
+          >
+            <span>Permintaan Reservasi</span>
+          </a>
+          <a
+            href="kelola-ruangan.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Kelola Ruangan</span>
+          </a>
+          <a
+            href="laporan-statistik.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Laporan & Statistik</span>
+          </a>
+          <a
+            href="pengaturan-sistem.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Pengaturan Sistem</span>
+          </a>
+          <a
+            href="manajemen-pengguna.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Manajemen Pengguna</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="flex-1 overflow-y-auto">
+        <!-- Header -->
+        <header
+          class="bg-gray-800 text-white py-4 px-6 flex justify-between items-center"
+        >
+          <h1 class="text-xl font-bold">SIRESA - Permintaan Reservasi</h1>
+          <div>
+            <button
+              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-full"
+            >
+              Admin
+            </button>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="p-6">
+          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-xl font-bold">Semua Permintaan Reservasi</h2>
+              <div class="flex gap-4">
+                <button
+                  class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                >
+                  Tambah Permintaan
+                </button>
+                <select class="border rounded px-3 py-2">
+                  <option>Semua Status</option>
+                  <option>Menunggu</option>
+                  <option>Disetujui</option>
+                  <option>Ditolak</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="text-left p-3">ID</th>
+                    <th class="text-left p-3">Peminjam</th>
+                    <th class="text-left p-3">Ruangan</th>
+                    <th class="text-left p-3">Tanggal/Waktu</th>
+                    <th class="text-left p-3">Status</th>
+                    <th class="text-left p-3">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t">
+                    <td class="p-3">#2534</td>
+                    <td class="p-3">Budi Santoso</td>
+                    <td class="p-3">101 - Gedung A</td>
+                    <td class="p-3">06/03/2025 08:00-10:00</td>
+                    <td class="p-3">
+                      <span
+                        class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"
+                        >Menunggu</span
+                      >
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Setuju
+                      </button>
+                      <button
+                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Tolak
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">#2529</td>
+                    <td class="p-3">Anisa Putri</td>
+                    <td class="p-3">102 - Gedung A</td>
+                    <td class="p-3">05/03/2025 13:00-15:00</td>
+                    <td class="p-3">
+                      <span
+                        class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"
+                        >Disetujui</span
+                      >
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                      <button
+                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Batalkan
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">#2520</td>
+                    <td class="p-3">Hendra Wijaya</td>
+                    <td class="p-3">305 - Gedung C</td>
+                    <td class="p-3">01/03/2025 09:00-12:00</td>
+                    <td class="p-3">
+                      <span
+                        class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs"
+                        >Ditolak</span
+                      >
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-6">
+              <nav class="flex space-x-2">
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md"
+                  >1</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
+                  >2</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
+                  >3</a
+                >
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

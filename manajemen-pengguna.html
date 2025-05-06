@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIRESA - Manajemen Pengguna</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <div class="w-64 bg-gray-800 text-white">
+        <div class="p-6 bg-gray-900">
+          <h1 class="text-xl font-bold">SIRESA - Admin Dashboard</h1>
+        </div>
+        <nav class="mt-6">
+          <a
+            href="dashboard.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="permintaan-reservasi.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Permintaan Reservasi</span>
+          </a>
+          <a
+            href="kelola-ruangan.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Kelola Ruangan</span>
+          </a>
+          <a
+            href="laporan-statistik.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Laporan & Statistik</span>
+          </a>
+          <a
+            href="pengaturan-sistem.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Pengaturan Sistem</span>
+          </a>
+          <a
+            href="manajemen-pengguna.html"
+            class="flex items-center px-6 py-4 bg-blue-600 text-white"
+          >
+            <span>Manajemen Pengguna</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="flex-1 overflow-y-auto">
+        <!-- Header -->
+        <header
+          class="bg-gray-800 text-white py-4 px-6 flex justify-between items-center"
+        >
+          <h1 class="text-xl font-bold">SIRESA - Manajemen Pengguna</h1>
+          <div>
+            <button
+              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-full"
+            >
+              Admin
+            </button>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="p-6">
+          <!-- User Management Tools -->
+          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-xl font-bold">Daftar Pengguna</h2>
+              <div class="flex gap-4">
+                <div class="relative">
+                  <input
+                    type="text"
+                    placeholder="Cari pengguna..."
+                    class="border rounded px-3 py-2 pr-10"
+                  />
+                  <span class="absolute right-3 top-2 text-gray-400">🔍</span>
+                </div>
+                <button
+                  class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                >
+                  Tambah Pengguna
+                </button>
+              </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="border-b mb-6">
+              <nav class="flex -mb-px">
+                <a
+                  href="#"
+                  class="py-3 px-4 border-b-2 border-blue-500 text-blue-600 font-medium"
+                >
+                  Semua Pengguna
+                </a>
+                <a
+                  href="#"
+                  class="py-3 px-4 text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Admin
+                </a>
+                <a
+                  href="#"
+                  class="py-3 px-4 text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Dosen
+                </a>
+                <a
+                  href="#"
+                  class="py-3 px-4 text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Mahasiswa
+                </a>
+                <a
+                  href="#"
+                  class="py-3 px-4 text-gray-500 hover:text-gray-700 font-medium"
+                >
+                  Staff
+                </a>
+              </nav>
+            </div>
+
+            <!-- User Table -->
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="text-left p-3">#</th>
+                    <th class="text-left p-3">Nama</th>
+                    <th class="text-left p-3">Email</th>
+                    <th class="text-left p-3">Peran</th>
+                    <th class="text-left p-3">Departemen</th>
+                    <th class="text-left p-3">Status</th>
+                    <th class="text-left p-3">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t">
+                    <td class="p-3">1</td>
+                    <td class="p-3">Ahmad Fauzi</td>
+                    <td class="p-3">ahmad@example.com</td>
+                    <td class="p-3">Admin</td>
+                    <td class="p-3">IT</td>
+                    <td class="p-3">
+                      <span
+                        class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"
+                        >Aktif</span
+                      >
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">2</td>
+                    <td class="p-3">Budi Santoso</td>
+                    <td class="p-3">budi@example.com</td>
+                    <td class="p-3">Dosen</td>
+                    <td class="p-3">Teknik Informatika</td>
+                    <td class="p-3">
+                      <span
+                        class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"
+                        >Aktif</span
+                      >
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">3</td>
+                    <td class="p-3">Siti Aminah</td>
+                    <td class="p-3">siti@example.com</td>
+                    <td class="p-3">Mahasiswa</td>
+                    <td class="p-3">Teknik Elektro</td>
+                    <td class="p-3">
+                      <span
+                        class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"
+                        >Aktif</span
+                      >
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">4</td>
+                    <td class="p-3">Dewi Kartika</td>
+                    <td class="p-3">dewi@example.com</td>
+                    <td class="p-3">Staff</td>
+                    <td class="p-3">Administrasi</td>
+                    <td class="p-3">
+                      <span
+                        class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"
+                        >Nonaktif</span
+                      >
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">5</td>
+                    <td class="p-3">Rudi Hermawan</td>
+                    <td class="p-3">rudi@example.com</td>
+                    <td class="p-3">Dosen</td>
+                    <td class="p-3">Sistem Informasi</td>
+                    <td class="p-3">
+                      <span
+                        class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"
+                        >Aktif</span
+                      >
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-6">
+              <div class="text-sm text-gray-600">
+                Menampilkan 1-5 dari 25 pengguna
+              </div>
+              <nav class="flex space-x-2">
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md"
+                  >1</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
+                  >2</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
+                  >3</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
+                  >4</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
+                  >5</a
+                >
+              </nav>
+            </div>
+          </div>
+
+          <!-- Role Management -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-bold mb-6">Manajemen Peran</h2>
+
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="text-left p-3">Peran</th>
+                    <th class="text-left p-3">Jumlah Pengguna</th>
+                    <th class="text-left p-3">Deskripsi</th>
+                    <th class="text-left p-3">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t">
+                    <td class="p-3 font-medium">Admin</td>
+                    <td class="p-3">3</td>
+                    <td class="p-3">Akses penuh ke semua fitur sistem</td>
+                    <td class="p-3">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit Izin
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3 font-medium">Dosen</td>
+                    <td class="p-3">18</td>
+                    <td class="p-3">Dapat membuat dan mengelola reservasi</td>
+                    <td class="p-3">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit Izin
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3 font-medium">Mahasiswa</td>
+                    <td class="p-3">120</td>
+                    <td class="p-3">Dapat membuat permintaan reservasi</td>
+                    <td class="p-3">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit Izin
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3 font-medium">Staff</td>
+                    <td class="p-3">15</td>
+                    <td class="p-3">
+                      Dapat mengelola dan menyetujui reservasi
+                    </td>
+                    <td class="p-3">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit Izin
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

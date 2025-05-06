@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIRESA - Detail Ruangan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+        }
+        
+        .header {
+            background-color: #4056b4;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+        
+        .user-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 25px;
+            padding: 8px 16px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .breadcrumb {
+            padding: 15px 20px;
+            display: flex;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+        
+        .main-container {
+            padding: 0 20px 20px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .room-header {
+            background-color: #e4e8f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .room-header h2 {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .room-details {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .top-section {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .room-image {
+            flex: 0 0 40%;
+            padding-right: 20px;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 220px;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+        }
+        
+        .photo-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 40px;
+        }
+        
+        .room-info {
+            flex: 0 0 60%;
+        }
+        
+        .info-section h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            row-gap: 15px;
+            font-size: 14px;
+        }
+        
+        .info-label {
+            color: #555;
+        }
+        
+        .info-value {
+            color: #333;
+        }
+        
+        .bottom-section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .facilities-section {
+            width: 70%;
+            padding-right: 20px;
+        }
+        
+        .facilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .facility {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: #e8f4ff;
+            border-radius: 50%;
+            color: #4056b4;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .booking-section {
+            width: 30%;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .booking-status {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .booking-button {
+            background-color: #4056b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            width: 100%;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .booking-button:hover {
+            background-color: #344899;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SIRESA - Detail Ruangan</h1>
+        <button class="user-button">Nama Pengguna</button>
+    </div>
+    
+    <div class="breadcrumb">
+        <a href="Home4b.html">Beranda</a>
+        <span>></span>
+        <a href="#">Ruangan</a>
+        <span>></span>
+        Detail Ruangan 101
+    </div>
+    
+    <div class="main-container">
+        <div class="room-header">
+            <h2>Ruangan 101 - Gedung A</h2>
+        </div>
+        
+        <div class="room-details">
+            <div class="top-section">
+                <div class="room-image">
+                    <div class="image-placeholder">
+                        <button class="photo-button">Foto</button>
+                    </div>
+                </div>
+                
+                <div class="room-info">
+                    <div class="info-section">
+                        <h3>Informasi Ruangan</h3>
+                        <div class="info-grid">
+                            <div class="info-label">Lokasi:</div>
+                            <div class="info-value">Lantai 1, Gedung A</div>
+                            
+                            <div class="info-label">Kapasitas:</div>
+                            <div class="info-value">40 orang</div>
+                            
+                            <div class="info-label">Ukuran:</div>
+                            <div class="info-value">8m x 12m (96m²)</div>
+                            
+                            <div class="info-label">Tipe:</div>
+                            <div class="info-value">Ruang Kelas</div>
+                            
+                            <div class="info-label">Layout:</div>
+                            <div class="info-value">Theater Style</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-section">
+                <div class="facilities-section">
+                    <h3>Fasilitas Ruangan</h3>
+                    <div class="facilities">
+                        <div class="facility">AC</div>
+                        <div class="facility">Proyektor</div>
+                        <div class="facility">WiFi</div>
+                        <div class="facility">Speaker</div>
+                        <div class="facility">Whiteboard</div>
+                        <div class="facility">Meja</div>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <h3>Pesan Ruangan Ini</h3>
+                    <div class="booking-status">Status: Tersedia</div>
+                    <button class="booking-button" id="bookingBtn">Ajukan Peminjaman</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('bookingBtn').addEventListener('click', function() {
+                alert('Permintaan peminjaman ruangan sedang diproses. Silakan tunggu konfirmasi.');
+            });
+            
+            document.querySelector('.user-button').addEventListener('click', function() {
+                alert('Menu pengguna akan ditampilkan di sini.');
+            });
+        });
+    </script>
+</body>
+</html>

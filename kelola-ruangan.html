@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/src/output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>SIRESA - Kelola Ruangan</title>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <div class="w-64 bg-gray-800 text-white">
+        <div class="p-6 bg-gray-900">
+          <h1 class="text-xl font-bold">SIRESA - Admin Dashboard</h1>
+        </div>
+        <nav class="mt-6">
+          <a
+            href="dashboard.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="permintaan-reservasi.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Permintaan Reservasi</span>
+          </a>
+          <a
+            href="kelola-ruangan.html"
+            class="flex items-center px-6 py-4 bg-blue-600 text-white"
+          >
+            <span>Kelola Ruangan</span>
+          </a>
+          <a
+            href="laporan-statistik.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Laporan & Statistik</span>
+          </a>
+          <a
+            href="pengaturan-sistem.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Pengaturan Sistem</span>
+          </a>
+          <a
+            href="manajemen-pengguna.html"
+            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
+          >
+            <span>Manajemen Pengguna</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="flex-1 overflow-y-auto">
+        <!-- Header -->
+        <header
+          class="bg-gray-800 text-white py-4 px-6 flex justify-between items-center"
+        >
+          <h1 class="text-xl font-bold">SIRESA - Kelola Ruangan</h1>
+          <div>
+            <button
+              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-full"
+            >
+              Admin
+            </button>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="p-6">
+          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-xl font-bold">Daftar Ruangan</h2>
+              <div class="flex gap-4">
+                <button
+                  class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                >
+                  Tambah Ruangan
+                </button>
+                <select class="border rounded px-3 py-2">
+                  <option>Semua Gedung</option>
+                  <option>Gedung A</option>
+                  <option>Gedung B</option>
+                  <option>Gedung C</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Ruangan Card -->
+              <div class="border rounded-lg overflow-hidden shadow-sm">
+                <div class="bg-gray-200 h-40 flex items-center justify-center">
+                  <span class="text-2xl font-bold text-gray-500">101</span>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-lg">Ruangan 101 - Gedung A</h3>
+                  <p class="text-gray-600 mt-2">Kapasitas: 30 orang</p>
+                  <p class="text-gray-600">
+                    Fasilitas: Proyektor, AC, Whiteboard
+                  </p>
+                  <div class="mt-4 flex justify-between">
+                    <span
+                      class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"
+                      >Tersedia</span
+                    >
+                    <div class="flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border rounded-lg overflow-hidden shadow-sm">
+                <div class="bg-gray-200 h-40 flex items-center justify-center">
+                  <span class="text-2xl font-bold text-gray-500">102</span>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-lg">Ruangan 102 - Gedung A</h3>
+                  <p class="text-gray-600 mt-2">Kapasitas: 25 orang</p>
+                  <p class="text-gray-600">
+                    Fasilitas: Proyektor, AC, Whiteboard
+                  </p>
+                  <div class="mt-4 flex justify-between">
+                    <span
+                      class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"
+                      >Direservasi</span
+                    >
+                    <div class="flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border rounded-lg overflow-hidden shadow-sm">
+                <div class="bg-gray-200 h-40 flex items-center justify-center">
+                  <span class="text-2xl font-bold text-gray-500">204</span>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-lg">Ruangan 204 - Gedung B</h3>
+                  <p class="text-gray-600 mt-2">Kapasitas: 40 orang</p>
+                  <p class="text-gray-600">
+                    Fasilitas: Proyektor, AC, Whiteboard, Sound System
+                  </p>
+                  <div class="mt-4 flex justify-between">
+                    <span
+                      class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"
+                      >Tersedia</span
+                    >
+                    <div class="flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border rounded-lg overflow-hidden shadow-sm">
+                <div class="bg-gray-200 h-40 flex items-center justify-center">
+                  <span class="text-2xl font-bold text-gray-500">305</span>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-lg">Ruangan 305 - Gedung C</h3>
+                  <p class="text-gray-600 mt-2">Kapasitas: 50 orang</p>
+                  <p class="text-gray-600">
+                    Fasilitas: Proyektor, AC, Whiteboard, Sound System, Komputer
+                  </p>
+                  <div class="mt-4 flex justify-between">
+                    <span
+                      class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs"
+                      >Pemeliharaan</span
+                    >
+                    <div class="flex space-x-2">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm"
+                      >
+                        Detail
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-6">
+              <nav class="flex space-x-2">
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md"
+                  >1</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
+                  >2</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
+                  >3</a
+                >
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
