@@ -129,8 +129,8 @@
   <script>
     document.getElementById("loginForm").addEventListener("submit", async function (e) {
         e.preventDefault();
-
-        const nim_nip = document.getElementById("nim").value; // Ubah nama variabel
+        
+        const nim_nip = document.getElementById("nim").value;
         const password = document.getElementById("password").value;
 
         try {
@@ -139,7 +139,7 @@
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ nim_nip: nim_nip, password: password }), // Ubah nama field
+                body: JSON.stringify({ nim_nip: nim_nip, password: password }),
             });
 
             if (!response.ok) {
@@ -148,12 +148,26 @@
 
             const data = await response.json();
 
-            alert(data.message || "Login berhasil!");
-            // contoh redirect setelah login sukses
-            // window.location.href = "dashboard.html";
+            showLoginSuccess();
+            function showLoginSuccess() {
+              alert(data.message || "Login berhasil!");
+            }
+
+            // Simpan data pengguna ke localStorage
+            localStorage.setItem('username', data.user.nama); // Sesuaikan dengan nama field yang benar
+            localStorage.setItem('userId', data.user.id_user);  // Sesuaikan dengan nama field yang benar
+
+            if (data.user.role == "admin") {
+                window.location.href = "dashboard.html"; // Redirect ke halaman admin
+            } else if (data.user.role == "mahasiswa") {
+              window.location.href = "PencarianRuangan.html"; 
+            }// Redirect setelah login
+            
         } catch (error) {
             alert(error.message);
         }
+
+        
     });
 </script>
 </body>

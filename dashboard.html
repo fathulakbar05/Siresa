@@ -1,228 +1,128 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SIRESA - Admin Dashboard</title>
-    <link rel="stylesheet" href="/src/output.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 font-sans">
-    <div class="flex h-screen">
-      <!-- Sidebar -->
-      <div class="w-64 bg-gray-800 text-white">
-        <div class="p-6 bg-gray-900">
-          <h1 class="text-xl font-bold">SIRESA - Admin Dashboard</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIRESA - Admin Dashboard</title>
+  <link rel="stylesheet" href="/src/output.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="flex h-screen">
+    <div class="flex-1 overflow-y-auto">
+      <header
+        class="bg-gray-800 text-white py-4 px-6 flex justify-between items-center"
+      >
+        <h1 class="text-xl font-bold">SIRESA - Admin Dashboard</h1>
+        <div>
+          <button
+            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-full"
+          >
+            Admin
+          </button>
         </div>
-        <nav class="mt-6">
-          <a
-            href="dashboard.html"
-            class="flex items-center px-6 py-4 bg-blue-600 text-white"
-          >
-            <span>Dashboard</span>
-          </a>
-          <a
-            href="permintaan-reservasi.html"
-            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
-          >
-            <span>Permintaan Reservasi</span>
-          </a>
-          <a
-            href="kelola-ruangan.html"
-            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
-          >
-            <span>Kelola Ruangan</span>
-          </a>
-          <a
-            href="laporan-statistik.html"
-            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
-          >
-            <span>Laporan & Statistik</span>
-          </a>
-          <a
-            href="pengaturan-sistem.html"
-            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
-          >
-            <span>Pengaturan Sistem</span>
-          </a>
-          <a
-            href="manajemen-pengguna.html"
-            class="flex items-center px-6 py-4 hover:bg-gray-700 text-gray-300 hover:text-white"
-          >
-            <span>Manajemen Pengguna</span>
-          </a>
-        </nav>
-      </div>
+      </header>
 
-      <!-- Main Content -->
-      <div class="flex-1 overflow-y-auto">
-        <!-- Header -->
-        <header
-          class="bg-gray-800 text-white py-4 px-6 flex justify-between items-center"
-        >
-          <h1 class="text-xl font-bold">SIRESA - Admin Dashboard</h1>
-          <div>
-            <button
-              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-full"
-            >
-              Admin
-            </button>
-          </div>
-        </header>
-
-        <!-- Content -->
-        <div class="p-6">
-          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-xl font-bold mb-4">Ringkasan Sistem</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div class="bg-blue-50 p-4 rounded-lg">
-                <h3 class="font-medium text-gray-700">Permintaan Baru: 15</h3>
-              </div>
-              <div class="bg-green-50 p-4 rounded-lg">
-                <h3 class="font-medium text-gray-700">Disetujui: 28</h3>
-              </div>
-              <div class="bg-red-50 p-4 rounded-lg">
-                <h3 class="font-medium text-gray-700">Ditolak: 3</h3>
-              </div>
-              <div class="bg-yellow-50 p-4 rounded-lg">
-                <h3 class="font-medium text-gray-700">Total Ruangan: 42</h3>
-              </div>
+      <div class="p-6">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h2 class="text-xl font-bold mb-4">Ringkasan Sistem</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-blue-50 p-4 rounded-lg">
+              <h3 class="font-medium text-gray-700">Permintaan Baru: <span id="jumlah-menunggu"></span></h3>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg">
+              <h3 class="font-medium text-gray-700">Disetujui: <span id="jumlah-disetujui"></span></h3>
+            </div>
+            <div class="bg-red-50 p-4 rounded-lg">
+              <h3 class="font-medium text-gray-700">Ditolak: <span id="jumlah-ditolak"></span></h3>
+            </div>
+            <div class="bg-yellow-50 p-4 rounded-lg">
+              <h3 class="font-medium text-gray-700">Total Ruangan: 42</h3>
             </div>
           </div>
+        </div>
 
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-bold mb-4">
-              Permintaan Menunggu Persetujuan
-            </h2>
-            <div class="overflow-x-auto">
-              <table class="w-full">
-                <thead>
-                  <tr class="bg-gray-100">
-                    <th class="text-left p-3">ID</th>
-                    <th class="text-left p-3">Peminjam</th>
-                    <th class="text-left p-3">Ruangan</th>
-                    <th class="text-left p-3">Tanggal/Waktu</th>
-                    <th class="text-left p-3">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="border-t">
-                    <td class="p-3">#2534</td>
-                    <td class="p-3">Budi Santoso</td>
-                    <td class="p-3">101 - Gedung A</td>
-                    <td class="p-3">06/03/2025 08:00-10:00</td>
-                    <td class="p-3 flex space-x-2">
-                      <button
-                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-                      >
-                        Setuju
-                      </button>
-                      <button
-                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                      >
-                        Tolak
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="border-t">
-                    <td class="p-3">#2535</td>
-                    <td class="p-3">Siti Aminah</td>
-                    <td class="p-3">204 - Gedung B</td>
-                    <td class="p-3">07/03/2025 13:00-15:00</td>
-                    <td class="p-3 flex space-x-2">
-                      <button
-                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-                      >
-                        Setuju
-                      </button>
-                      <button
-                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                      >
-                        Tolak
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="border-t">
-                    <td class="p-3">#2536</td>
-                    <td class="p-3">Ahmad Ridwan</td>
-                    <td class="p-3">305 - Gedung C</td>
-                    <td class="p-3">08/03/2025 09:00-12:00</td>
-                    <td class="p-3 flex space-x-2">
-                      <button
-                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-                      >
-                        Setuju
-                      </button>
-                      <button
-                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                      >
-                        Tolak
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="border-t">
-                    <td class="p-3">#2537</td>
-                    <td class="p-3">Dewi Kartika</td>
-                    <td class="p-3">101 - Gedung A</td>
-                    <td class="p-3">09/03/2025 10:00-12:00</td>
-                    <td class="p-3 flex space-x-2">
-                      <button
-                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-                      >
-                        Setuju
-                      </button>
-                      <button
-                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                      >
-                        Tolak
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="border-t">
-                    <td class="p-3">#2538</td>
-                    <td class="p-3">Rudi Hermawan</td>
-                    <td class="p-3">204 - Gedung B</td>
-                    <td class="p-3">10/03/2025 08:00-11:00</td>
-                    <td class="p-3 flex space-x-2">
-                      <button
-                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-                      >
-                        Setuju
-                      </button>
-                      <button
-                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                      >
-                        Tolak
-                      </button>
-                    </td>
-                  </tr>
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-xl font-bold mb-4">
+            Seluruh Data Reservasi
+          </h2>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="text-left p-3">ID Reservasi</th>
+                  <th class="text-left p-3">ID User</th>
+                  <th class="text-left p-3">ID Ruangan</th>
+                  <th class="text-left p-3">Tanggal</th>
+                  <th class="text-left p-3">Jam Mulai</th>
+                  <th class="text-left p-3">Jam Selesai</th>
+                  <th class="text-left p-3">Status</th>
+                  <th class="text-left p-3">Waktu Pengajuan</th>
+                </tr>
+              </thead>
+              <tbody id="data-reservasi">
                 </tbody>
-              </table>
-            </div>
-
-            <!-- Pagination -->
-            <div class="flex justify-center mt-6">
-              <nav class="flex space-x-2">
-                <a
-                  href="#"
-                  class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md"
-                  >1</a
-                >
-                <a
-                  href="#"
-                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
-                  >2</a
-                >
-                <a
-                  href="#"
-                  class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-md"
-                  >3</a
-                >
-              </nav>
-            </div>
+            </table>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const statusDicari = "pending"; // Contoh nilai status
+      const url = `http://127.0.0.1:8080/reservasi/by-status?status=${statusDicari}`;
+      fetch(url) // Mengambil semua status
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Gagal mengambil data reservasi: ' + response.status);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data); // Proses data reservasi
+          
+          const tabelBody = document.getElementById('data-reservasi');
+          tabelBody.innerHTML = ''; // Kosongkan isi tabel sebelum menambahkan data baru
+
+          data.forEach(reservasi => {
+            const row = tabelBody.insertRow();
+            const idReservasiCell = row.insertCell();
+            const idUserCell = row.insertCell();
+            const idRuanganCell = row.insertCell();
+            const tanggalCell = row.insertCell();
+            const jamMulaiCell = row.insertCell();
+            const jamSelesaiCell = row.insertCell();
+            const statusCell = row.insertCell();
+            const waktuPengajuanCell = row.insertCell();
+
+            idReservasiCell.textContent = reservasi.IDReservasi;
+            idUserCell.textContent = reservasi.IDUser;
+            idRuanganCell.textContent = reservasi.IDRuangan;
+            tanggalCell.textContent = reservasi.Tanggal;
+            jamMulaiCell.textContent = reservasi.JamMulai;
+            jamSelesaiCell.textContent = reservasi.JamSelesai;
+            statusCell.textContent = reservasi.Status;
+            waktuPengajuanCell.textContent = new Date(reservasi.WaktuPengajuan).toLocaleString();
+          });
+
+          // Hitung dan tampilkan ringkasan
+          const jumlahMenunggu = data.filter(r => r.Status === 'menunggu').length;
+          const jumlahDisetujui = data.filter(r => r.Status === 'disetujui').length;
+          const jumlahDitolak = data.filter(r => r.Status === 'ditolak').length;
+
+          document.getElementById('jumlah-menunggu').textContent = jumlahMenunggu;
+          document.getElementById('jumlah-disetujui').textContent = jumlahDisetujui;
+          document.getElementById('jumlah-ditolak').textContent = jumlahDitolak;
+
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const tabelBody = document.getElementById('data-reservasi');
+          tabelBody.innerHTML = '<tr><td colspan="8" class="p-3 text-center text-red-500">' + error + '</td></tr>';
+        });
+    });
+  </script>
+</body>
 </html>
