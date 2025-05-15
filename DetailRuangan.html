@@ -206,15 +206,17 @@
     
     <div class="breadcrumb">
         <a href="Home4b.html">Beranda</a>
-        <span>></span>
+        <span></span>
         <a href="#">Ruangan</a>
-        <span>></span>
-        Detail Ruangan 101
+        <span></span>
+        <p id="room-name-breadcrumb"></p> 
+        <!-- Detail Ruangan 101 -->
     </div>
     
     <div class="main-container">
         <div class="room-header">
-            <h2>Ruangan 101 - Gedung A</h2>
+            <h2 id="room-name-header"></h2>
+            <!-- Ruangan 101 - Gedung A -->
         </div>
         
         <div class="room-details">
@@ -230,19 +232,24 @@
                         <h3>Informasi Ruangan</h3>
                         <div class="info-grid">
                             <div class="info-label">Lokasi:</div>
-                            <div class="info-value">Lantai 1, Gedung A</div>
-                            
+                            <div class="info-value" id="room-location"></div>
+                            <!-- Lantai 1, Gedung A -->
+
                             <div class="info-label">Kapasitas:</div>
-                            <div class="info-value">40 orang</div>
-                            
+                            <div class="info-value" id="room-capacity"></div>
+                            <!-- 40 orang -->
+
                             <div class="info-label">Ukuran:</div>
-                            <div class="info-value">8m x 12m (96m²)</div>
-                            
+                            <div class="info-value" id="room-size"></div>
+                            <!-- 8m x 12m (96m²) -->
+
                             <div class="info-label">Tipe:</div>
-                            <div class="info-value">Ruang Kelas</div>
-                            
+                            <div class="info-value" id="room-type"></div>
+                            <!-- Ruang Kelas -->
+
                             <div class="info-label">Layout:</div>
-                            <div class="info-value">Theater Style</div>
+                            <div class="info-value" id="room-layout"></div>
+                            <!-- Theater Style -->
                         </div>
                     </div>
                 </div>
@@ -251,7 +258,7 @@
             <div class="bottom-section">
                 <div class="facilities-section">
                     <h3>Fasilitas Ruangan</h3>
-                    <div class="facilities">
+                    <div class="facilities" id="room-facilities">
                         <div class="facility">AC</div>
                         <div class="facility">Proyektor</div>
                         <div class="facility">WiFi</div>
@@ -276,6 +283,68 @@
                 alert('Permintaan peminjaman ruangan sedang diproses. Silakan tunggu konfirmasi.');
             });
             
+            document.querySelector('.user-button').addEventListener('click', function() {
+                alert('Menu pengguna akan ditampilkan di sini.');
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomId = urlParams.get('id'); // Perbaikan: ambil parameter dengan nama 'id'
+
+            if (roomId) {
+                fetch(`/ruangan/${roomId}`) // Sesuaikan endpoint API Anda untuk mengambil detail berdasarkan ID
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(room => {
+                    // Pastikan struktur data sesuai dengan yang Anda kirim dari server
+                    document.getElementById('room-name-header').textContent = `${room.nama_ruangan} - ${room.lokasi_gedung}`;
+                    document.getElementById('room-name-breadcrumb').textContent = `Detail Ruangan ${room.nama_ruangan}`;
+                    document.getElementById('room-location').textContent = `${room.lantai} ${room.lokasi_gedung}`;
+                    document.getElementById('room-capacity').textContent = `${room.kapasitas} orang`;
+                    document.getElementById('room-size').textContent = room.ukuran || 'Tidak Tersedia'; // Tambahkan penanganan jika properti tidak ada
+                    document.getElementById('room-type').textContent = room.tipe || 'Tidak Tersedia';
+                    document.getElementById('room-layout').textContent = room.layout || 'Tidak Tersedia';
+                    // document.getElementById('room-status').textContent = `Status: ${room.status_pemesanan || 'Tersedia'}`; // Sesuaikan dengan properti status di API
+
+                    const facilitiesContainer = document.getElementById('room-facilities');
+                    if (room.fasilitas) {
+                        const facilitiesArray = room.fasilitas.split(','); // Asumsi fasilitas dipisahkan koma
+                        facilitiesArray.forEach(facility => {
+                            const facilityDiv = document.createElement('div');
+                            facilityDiv.className = 'facility';
+                            facilityDiv.textContent = facility.trim();
+                            facilitiesContainer.appendChild(facilityDiv);
+                        });
+                    } else {
+                        const noFacilities = document.createElement('p');
+                        noFacilities.textContent = 'Tidak ada fasilitas yang tersedia untuk ruangan ini.';
+                        facilitiesContainer.appendChild(noFacilities);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching room details:', error);
+                    // Tampilkan pesan error kepada pengguna jika perlu
+                    const mainContainer = document.querySelector('.main-container');
+                    mainContainer.innerHTML = `<p style="color: red;">Gagal mengambil detail ruangan. Error: ${error.message}</p>`;
+                });
+            } else {
+                // Jika tidak ada ID di URL, tampilkan pesan error
+                const mainContainer = document.querySelector('.main-container');
+                mainContainer.innerHTML = '<p style="color: red;">ID ruangan tidak ditemukan dalam URL.</p>';
+            }
+
+            document.getElementById('bookingBtn').addEventListener('click', function() {
+                alert('Permintaan peminjaman ruangan sedang diproses. Silakan tunggu konfirmasi untuk ruangan dengan ID: ' + roomId);
+                // Di sini Anda bisa menambahkan logika untuk mengirim permintaan peminjaman ke server
+            });
+
             document.querySelector('.user-button').addEventListener('click', function() {
                 alert('Menu pengguna akan ditampilkan di sini.');
             });
