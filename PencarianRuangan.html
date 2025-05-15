@@ -308,90 +308,17 @@
             <!-- Ruangan Tersedia -->
             <div class="rooms">
                 <h2>Ruangan Tersedia (6)</h2>
-                <div class="room-list">
+                <div class="room-list" id="room-list">
 
                     <div class="room-card">
                         <div class="room-number">101</div>
                         <div class="room-info">
-                        <div>
-                            <p><strong>Ruang 101 - Gedung A</strong></p>
-                            <p>Kapasitas: 40 orang</p>
-                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
-                        </div>
-                        <a href="DetailRuangan.html"><button>Pilih</button></a>
-                        </div>
-                    </div>
-
-                    <!-- Duplikat card jika diperlukan -->
-                    <div class="room-card">
-                        <div class="room-number">101</div>
-                        <div class="room-info">
-                        <div>
-                            <p><strong>Ruang 101 - Gedung A</strong></p>
-                            <p>Kapasitas: 40 orang</p>
-                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
-                        </div>
-                        <button>Pilih</button>
-                        </div>
-                    </div>
-
-                    <div class="room-card">
-                        <div class="room-number">101</div>
-                        <div class="room-info">
-                        <div>
-                            <p><strong>Ruang 101 - Gedung A</strong></p>
-                            <p>Kapasitas: 40 orang</p>
-                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
-                        </div>
-                        <button>Pilih</button>
-                        </div>
-                    </div>
-
-                    <div class="room-card">
-                        <div class="room-number">101</div>
-                        <div class="room-info">
-                        <div>
-                            <p><strong>Ruang 101 - Gedung A</strong></p>
-                            <p>Kapasitas: 40 orang</p>
-                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
-                        </div>
-                        <button>Pilih</button>
-                        </div>
-                    </div>
-
-                    <div class="room-card">
-                        <div class="room-number">101</div>
-                        <div class="room-info">
-                        <div>
-                            <p><strong>Ruang 101 - Gedung A</strong></p>
-                            <p>Kapasitas: 40 orang</p>
-                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
-                        </div>
-                        <button>Pilih</button>
-                        </div>
-                    </div>
-
-                    <div class="room-card">
-                        <div class="room-number">101</div>
-                        <div class="room-info">
-                        <div>
-                            <p><strong>Ruang 101 - Gedung A</strong></p>
-                            <p>Kapasitas: 40 orang</p>
-                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
-                        </div>
-                        <button>Pilih</button>
-                        </div>
-                    </div>
-
-                    <div class="room-card">
-                        <div class="room-number">101</div>
-                        <div class="room-info">
-                        <div>
-                            <p><strong>Ruang 101 - Gedung A</strong></p>
-                            <p>Kapasitas: 40 orang</p>
-                            <p>Fasilitas: Proyektor, AC, Whiteboard</p>
-                        </div>
-                        <button>Pilih</button>
+                            <div>
+                                <p><strong>Ruang 101 - Gedung A</strong></p>
+                                <p>Kapasitas: 40 orang</p>
+                                <p>Fasilitas: Proyektor, AC, Whiteboard</p>
+                            </div>
+                            <a href="DetailRuangan.html"><button>Pilih</button></a>
                         </div>
                     </div>
 
@@ -400,6 +327,62 @@
             
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/ruangan')
+            .then(response => {
+                if (!response.ok) { // Handle HTTP error status
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(result => {
+                // Pastikan struktur response sesuai
+                if (!result.data || !Array.isArray(result.data)) {
+                    throw new Error('Invalid data structure from API');
+                }
+
+                const rooms = result.data;
+                const roomList = document.getElementById('room-list');
+                
+                roomList.innerHTML = rooms.length === 0 
+                    ? '<p>Tidak ada ruangan tersedia.</p>'
+                    : '';
+
+                rooms.forEach(room => {
+                    const roomDiv = document.createElement('div');
+                    roomDiv.className = 'room-card';
+
+                    // Perbaikan template untuk menggunakan data dinamis
+                    roomDiv.innerHTML = `
+                        <div class="room-number">${room.nama_ruangan}</div>
+                        <div class="room-info">
+                            <div>
+                                <p><strong>Ruang ${room.nama_ruangan} - ${room.lokasi_gedung}</strong></p>
+                                <p>Kapasitas: ${room.kapasitas} orang</p>
+                                <p>Fasilitas: ${room.fasilitas}</p>
+                            </div>
+                            <a href="DetailRuangan.html?id=${room.id}"><button>Pilih</button></a>
+                        </div>
+                    `;
+                    roomList.appendChild(roomDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const errorMessage = error.message.includes('Failed to fetch') 
+                    ? 'Tidak dapat terhubung ke server' 
+                    : 'Terjadi kesalahan saat mengambil data.';
+                
+                document.getElementById('room-list').innerHTML = `
+                    <p style="color: red;">${errorMessage}</p>
+                    <p>Detail: ${error.message}</p>
+                `;
+            });
+        });
+    </script>
+
 </body>
 
 </html>
