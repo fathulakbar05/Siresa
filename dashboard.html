@@ -9,6 +9,7 @@
   </head>
   <body class="bg-gray-100 font-sans">
     <div class="flex h-screen">
+      <!-- Sidebar -->
       <div class="w-64 bg-gray-800 text-white">
         <div class="p-6 bg-gray-900">
           <h1 class="text-xl font-bold">SIRESA - Admin Dashboard</h1>
@@ -53,7 +54,9 @@
         </nav>
       </div>
 
+      <!-- Main Content -->
       <div class="flex-1 overflow-y-auto">
+        <!-- Header -->
         <header
           class="bg-gray-800 text-white py-4 px-6 flex justify-between items-center"
         >
@@ -67,29 +70,22 @@
           </div>
         </header>
 
+        <!-- Content -->
         <div class="p-6">
           <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-xl font-bold mb-4">Ringkasan Sistem</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div class="bg-blue-50 p-4 rounded-lg">
-                <h3 class="font-medium text-gray-700">
-                  Permintaan Baru: <span id="permintaan-baru">0</span>
-                </h3>
+                <h3 class="font-medium text-gray-700">Permintaan Baru: 15</h3>
               </div>
               <div class="bg-green-50 p-4 rounded-lg">
-                <h3 class="font-medium text-gray-700">
-                  Disetujui: <span id="disetujui">0</span>
-                </h3>
+                <h3 class="font-medium text-gray-700">Disetujui: 28</h3>
               </div>
               <div class="bg-red-50 p-4 rounded-lg">
-                <h3 class="font-medium text-gray-700">
-                  Ditolak: <span id="ditolak">0</span>
-                </h3>
+                <h3 class="font-medium text-gray-700">Ditolak: 3</h3>
               </div>
               <div class="bg-yellow-50 p-4 rounded-lg">
-                <h3 class="font-medium text-gray-700">
-                  Total Ruangan: <span id="total-ruangan">0</span>
-                </h3>
+                <h3 class="font-medium text-gray-700">Total Ruangan: 42</h3>
               </div>
             </div>
           </div>
@@ -109,10 +105,102 @@
                     <th class="text-left p-3">Aksi</th>
                   </tr>
                 </thead>
-                <tbody id="permintaan-menunggu-list"></tbody>
+                <tbody>
+                  <tr class="border-t">
+                    <td class="p-3">#2534</td>
+                    <td class="p-3">Budi Santoso</td>
+                    <td class="p-3">101 - Gedung A</td>
+                    <td class="p-3">06/03/2025 08:00-10:00</td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                      >
+                        Setuju
+                      </button>
+                      <button
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                      >
+                        Tolak
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">#2535</td>
+                    <td class="p-3">Siti Aminah</td>
+                    <td class="p-3">204 - Gedung B</td>
+                    <td class="p-3">07/03/2025 13:00-15:00</td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                      >
+                        Setuju
+                      </button>
+                      <button
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                      >
+                        Tolak
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">#2536</td>
+                    <td class="p-3">Ahmad Ridwan</td>
+                    <td class="p-3">305 - Gedung C</td>
+                    <td class="p-3">08/03/2025 09:00-12:00</td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                      >
+                        Setuju
+                      </button>
+                      <button
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                      >
+                        Tolak
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">#2537</td>
+                    <td class="p-3">Dewi Kartika</td>
+                    <td class="p-3">101 - Gedung A</td>
+                    <td class="p-3">09/03/2025 10:00-12:00</td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                      >
+                        Setuju
+                      </button>
+                      <button
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                      >
+                        Tolak
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-t">
+                    <td class="p-3">#2538</td>
+                    <td class="p-3">Rudi Hermawan</td>
+                    <td class="p-3">204 - Gedung B</td>
+                    <td class="p-3">10/03/2025 08:00-11:00</td>
+                    <td class="p-3 flex space-x-2">
+                      <button
+                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                      >
+                        Setuju
+                      </button>
+                      <button
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                      >
+                        Tolak
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
 
+            <!-- Pagination -->
             <div class="flex justify-center mt-6">
               <nav class="flex space-x-2">
                 <a
@@ -136,173 +224,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      const backendURL = "http://localhost:8080"; // Pastikan ini benar
-
-      async function fetchRingkasanSistem() {
-        try {
-          const token = localStorage.getItem("token");
-          console.log("Token Ringkasan Sistem:", token);
-          if (!token) {
-            throw new Error("Token tidak ditemukan. Pengguna belum login?");
-          }
-
-          const response = await fetch(`${backendURL}/api/admin/ringkasan`, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json", // Tambahkan ini
-            },
-          });
-
-          if (!response.ok) {
-            // Tangani berbagai kode status error
-            if (response.status === 401) {
-              throw new Error(
-                "Unauthorized: Token tidak valid atau kedaluwarsa."
-              );
-            } else if (response.status === 404) {
-              throw new Error(
-                "Not Found: Endpoint /api/admin/ringkasan tidak ditemukan."
-              );
-            } else {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-          }
-
-          const data = await response.json();
-          console.log("Data Ringkasan Sistem:", data);
-
-          // Pastikan elemen-elemen ini ada di HTML Anda
-          document.getElementById("total-ruangan").textContent =
-            data.total_ruangan;
-          document.getElementById("permintaan-baru").textContent =
-            data.permintaan_baru;
-          document.getElementById("disetujui").textContent = data.disetujui;
-          document.getElementById("ditolak").textContent = data.ditolak;
-        } catch (error) {
-          console.error("Gagal mengambil ringkasan sistem:", error);
-          // Tampilkan pesan error kepada pengguna (opsional)
-          // Misalnya: alert(error.message);
-        }
-      }
-
-      async function getPermintaanMenunggu() {
-        try {
-          const response = await fetch(
-            `${backendURL}/reservasi/by-status?status=menunggu`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          if (!response.ok) {
-            throw new Error("Gagal mengambil permintaan menunggu");
-          }
-          const data = await response.json();
-          console.log("Data Permintaan Menunggu:", data);
-
-          const listContainer = document.getElementById(
-            "permintaan-menunggu-list"
-          );
-          if (!listContainer) {
-            console.error(
-              "Elemen dengan ID 'permintaan-menunggu-list' tidak ditemukan!"
-            );
-            return;
-          }
-
-          listContainer.innerHTML = "";
-          data.forEach((item) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                        <td>${item.id_reservasi}</td>
-                        <td>${item.nama_peminjam}</td> 
-                        <td>${item.id_ruangan}</td>
-                        <td>${item.tanggal} ${item.jam_mulai} - ${item.jam_selesai}</td>
-                        <td>
-                            <button onclick="setujuiReservasi(${item.id_reservasi})" class="bg-green-500 text-white px-2 py-1 rounded">Setuju</button>
-                            <button onclick="tolakReservasi(${item.id_reservasi})" class="bg-red-500 text-white px-2 py-1 rounded">Tolak</button>
-                        </td>
-                    `;
-            listContainer.appendChild(row);
-          });
-        } catch (error) {
-          console.error("Gagal mengambil data permintaan menunggu:", error);
-        }
-      }
-
-      async function setujuiReservasi(idReservasi) {
-        await updateStatusReservasi("setujui", idReservasi);
-      }
-
-      async function tolakReservasi(idReservasi) {
-        await updateStatusReservasi("tolak", idReservasi);
-      }
-
-      async function updateStatusReservasi(aksi, idReservasi) {
-        try {
-          const token = localStorage.getItem("token");
-          console.log("Token Update Status:", token);
-          if (!token) {
-            throw new Error("Token tidak ditemukan. Pengguna belum login?");
-          }
-
-          const response = await fetch(
-            `${backendURL}/reservasi/${aksi}/${idReservasi}`,
-            {
-              method: "PUT", // Penting: Gunakan PUT untuk update
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json", // Tambahkan ini, mungkin penting untuk PUT
-              },
-              // body: JSON.stringify({}) // Tidak perlu body untuk setuju/tolak, tapi bisa dicoba jika diperlukan
-            }
-          );
-
-          if (!response.ok) {
-            if (response.status === 401) {
-              throw new Error(
-                "Unauthorized: Token tidak valid atau kedaluwarsa."
-              );
-            } else if (response.status === 404) {
-              throw new Error(
-                `Not Found: Endpoint /reservasi/${aksi}/${idReservasi} tidak ditemukan.`
-              );
-            } else {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-          }
-
-          const data = await response.json();
-          console.log(data.message); // Log pesan dari server
-
-          // Refresh data permintaan menunggu setelah berhasil mengubah status
-          getPermintaanMenunggu(); // Panggil fungsi ini untuk memperbarui tampilan
-        } catch (error) {
-          console.error(`Gagal ${aksi} reservasi:`, error);
-          // Tampilkan pesan error kepada pengguna (opsional)
-          // Misalnya: alert(error.message);
-        }
-      }
-
-      async function setujuiReservasi(idReservasi) {
-        await updateStatusReservasi("setujui", idReservasi);
-      }
-
-      async function tolakReservasi(idReservasi) {
-        await updateStatusReservasi("tolak", idReservasi);
-      }
-
-      // Panggil fungsi-fungsi ini saat halaman dimuat
-      window.onload = () => {
-        fetchRingkasanSistem();
-        getPermintaanMenunggu();
-      };
-    </script>
   </body>
 </html>

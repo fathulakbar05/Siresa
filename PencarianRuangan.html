@@ -263,7 +263,7 @@
         <div class="right">
             <a href="#">Home</a>
             <a href="JadwalRuangan.html">Kalender</a>
-            <button>Wahyu Trisno Aji</button>
+            <button id="nama-user">Wahyu Trisno Aji</button>
         </div>
     </nav>
 
@@ -272,22 +272,22 @@
             <!-- Filter Pencarian -->
             <div class="filter">
                 <h2>Filter Pencarian</h2>
-                <form>
+                <form id="filter-form">
                     <div>
                         <label>Tanggal</label>
-                        <input type="date" value="2025-06-03">
+                        <input type="date" value="2025-06-03" id="filter-tanggal">
                     </div>
                     <div>
                         <label>Waktu Mulai</label>
-                        <input type="time" value="08:00">
+                        <input type="time" value="08:00" id="filter-jam-mulai">
                     </div>
                     <div>
                         <label>Waktu Selesai</label>
-                        <input type="time" value="10:00">
+                        <input type="time" value="10:00" id="filter-jam-selesai">
                     </div>
                     <div>
                         <label>Gedung</label>
-                        <select>
+                        <select id="filter-gedung">
                             <option>Semua Gedung</option>
                             <option>Gedung A</option>
                             <option>Gedung B</option>
@@ -299,7 +299,7 @@
                     </div>
                     <div>
                         <label>Kapasitas Min.</label>
-                        <input type="number" placeholder="30 orang">
+                        <input type="number" placeholder="30 orang" id="filter-kapasitas">
                     </div>
                     <button>Cari Ruangan</button>
                 </form>
@@ -330,56 +330,103 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            fetch('/ruangan')
-            .then(response => {
-                if (!response.ok) { // Handle HTTP error status
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(result => {
-                // Pastikan struktur response sesuai
-                if (!result.data || !Array.isArray(result.data)) {
-                    throw new Error('Invalid data structure from API');
-                }
+            const roomList = document.getElementById('room-list');
+            const filterForm = document.getElementById('filter-form');
 
-                const rooms = result.data;
-                const roomList = document.getElementById('room-list');
-                
-                roomList.innerHTML = rooms.length === 0 
-                    ? '<p>Tidak ada ruangan tersedia.</p>'
-                    : '';
+            function fetchRuangan(url) {
+                fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    if (!result.data || !Array.isArray(result.data)) {
+                        throw new Error('Invalid data structure from API');
+                    }
 
-                rooms.forEach(room => {
-                    const roomDiv = document.createElement('div');
-                    roomDiv.className = 'room-card';
+                    const rooms = result.data;
+                    roomList.innerHTML = rooms.length === 0
+                        ? '<p>Tidak ada ruangan tersedia sesuai kriteria.</p>'
+                        : '';
 
-                    // Perbaikan template untuk menggunakan data dinamis
-                    roomDiv.innerHTML = `
-                        <div class="room-number">${room.nama_ruangan}</div>
-                        <div class="room-info">
-                            <div>
-                                <p><strong>Ruang ${room.nama_ruangan} - ${room.lokasi_gedung}</strong></p>
-                                <p>Kapasitas: ${room.kapasitas} orang</p>
-                                <p>Fasilitas: ${room.fasilitas}</p>
+                    rooms.forEach(room => {
+                        const roomDiv = document.createElement('div');
+                        roomDiv.className = 'room-card';
+
+                        roomDiv.innerHTML = `
+                            <div class="room-number">${room.nama_ruangan}</div>
+                            <div class="room-info">
+                                <div>
+                                    <p><strong>Ruang ${room.nama_ruangan} - ${room.lokasi_gedung}</strong></p>
+                                    <p>Kapasitas: ${room.kapasitas} orang</p>
+                                    <p>Fasilitas: ${room.fasilitas}</p>
+                                </div>
+                                <a href="DetailRuangan.html?id=${room.id_ruangan}"><button>Pilih</button></a>
                             </div>
-                            <a href="DetailRuangan.html?id=${room.id_ruangan}"><button>Pilih</button></a>
-                        </div>
+                        `;
+                        roomList.appendChild(roomDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const errorMessage = error.message.includes('Failed to fetch')
+                        ? 'Tidak dapat terhubung ke server'
+                        : 'Terjadi kesalahan saat mengambil data.';
+
+                    roomList.innerHTML = `
+                        <p style="color: red;">${errorMessage}</p>
+                        <p>Detail: ${error.message}</p>
                     `;
-                    roomList.appendChild(roomDiv);
                 });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                const errorMessage = error.message.includes('Failed to fetch') 
-                    ? 'Tidak dapat terhubung ke server' 
-                    : 'Terjadi kesalahan saat mengambil data.';
-                
-                document.getElementById('room-list').innerHTML = `
-                    <p style="color: red;">${errorMessage}</p>
-                    <p>Detail: ${error.message}</p>
-                `;
-            });
+            }
+
+            // Ambil semua ruangan saat halaman pertama kali dimuat
+            fetchRuangan('/ruangan');
+
+            // Event listener untuk form filter
+            if (filterForm) {
+                filterForm.addEventListener('submit', function(event) {
+
+                    console.log('Filter form submitted');
+
+                    event.preventDefault(); // Mencegah submit form biasa
+
+                    const tanggal = document.getElementById('filter-tanggal').value;
+                    const jamMulai = document.getElementById('filter-jam-mulai').value;
+                    const jamSelesai = document.getElementById('filter-jam-selesai').value;
+                    const gedung = document.getElementById('filter-gedung').value;
+                    const kapasitas = document.getElementById('filter-kapasitas').value;
+
+                    // Buat URL query string untuk filter
+                    let filterUrl = `/ruangan/filter?tanggal=${tanggal}&jam_mulai=${jamMulai}&jam_selesai=${jamSelesai}`;
+                    if (gedung) {
+                        filterUrl += `&gedung=${gedung}`;
+                    }
+                    if (kapasitas) {
+                        filterUrl += `&kapasitas=${kapasitas}`;
+                    }
+
+                    // Panggil fungsi fetch dengan URL filter
+                    fetchRuangan(filterUrl);
+                    
+                });
+            }
+
+            // Ambil data pengguna dari localStorage
+            // Pastikan data ini sudah disimpan saat login
+            const username = localStorage.getItem('username');
+            const userId = localStorage.getItem('userId');
+
+            const namaUserButton = document.getElementById('nama-user');
+
+            if (username && userId) {
+                console.log('Selamat datang, ' + username + ' (ID: ' + userId + ')');
+                namaUserButton.textContent = username; // Set teks tombol dengan username
+            } else {
+                window.location.href = 'login.html';
+            }
         });
     </script>
 

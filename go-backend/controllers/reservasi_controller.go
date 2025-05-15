@@ -5,29 +5,17 @@ import (
 	"strconv"
 	"time"
 
-	"go-backend/config"
-	"go-backend/models"
-
-	"github.com/gin-gonic/gin"
+    "github.com/gin-gonic/gin"
+    "go-backend/config"
+    "go-backend/models"
 )
 
-// Struktur untuk menampung data reservasi menunggu yang akan dikirim ke frontend
-type ReservasiMenunggu struct {
-	IDReservasi  int    `json:"id_reservasi"`
-	NamaPeminjam string `json:"nama_peminjam"`
-	IDRuangan    int    `json:"id_ruangan"`
-	Tanggal      string `json:"tanggal"`
-	JamMulai     string `json:"jam_mulai"`
-	JamSelesai   string `json:"jam_selesai"`
-}
-
-// AjukanReservasi menangani pengajuan reservasi baru
 func AjukanReservasi(c *gin.Context) {
-	var input models.Reservasi // Menggunakan JadwalReservasi
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+    var input models.Reservasi
+    if err := c.ShouldBindJSON(&input); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
 	// Konversi string tanggal dan waktu ke time.Time
 	tanggal, err := time.Parse("2006-01-02", input.Tanggal)
@@ -65,6 +53,9 @@ func AjukanReservasi(c *gin.Context) {
 		return
 	}
 
+    input.Status = "menunggu"
+    input.WaktuPengajuan = time.Now()
+
 	if err := config.DB.Create(&input).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -85,53 +76,43 @@ func AjukanReservasi(c *gin.Context) {
 
 // UpdateStatusReservasi memperbarui status reservasi (setujui/tolak)
 func UpdateStatusReservasi(c *gin.Context) {
-	aksi := c.Param("aksi")
-	idReservasiStr := c.Param("id_reservasi")
+    var input struct {
+        IDReservasi uint   `json:"id_reservasi"`
+        Status      string `json:"status"` // "disetujui" atau "ditolak"
+    }
 
-	idReservasi, err := strconv.Atoi(idReservasiStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "ID Reservasi tidak valid"})
-		return
-	}
+    if err := c.ShouldBindJSON(&input); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
-	var reservasi models.Reservasi // Menggunakan JadwalReservasi
-	if err := config.DB.First(&reservasi, idReservasi).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Reservasi tidak ditemukan"})
-		return
-	}
+    var reservasi models.Reservasi
+    if err := config.DB.First(&reservasi, input.IDReservasi).Error; err != nil {
+        c.JSON(http.StatusNotFound, gin.H{"error": "Reservasi tidak ditemukan"})
+        return
+    }
 
-	// Validasi aksi
-	if aksi != "setujui" && aksi != "tolak" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Aksi tidak valid"})
-		return
-	}
+    reservasi.Status = input.Status
+    config.DB.Save(&reservasi)
 
-	// Update status
-	reservasi.Status = aksi
-	config.DB.Save(&reservasi)
-
-	// Update notifikasi (jika perlu)
-	var notif models.Notifikasi
-	config.DB.Where("id_reservasi = ?", idReservasi).First(&notif)
-	notif.StatusReservasi = aksi
-	config.DB.Save(&notif)
+    // Update notifikasi
+    var notif models.Notifikasi
+    config.DB.Where("id_reservasi = ?", input.IDReservasi).First(&notif)
+    notif.StatusReservasi = input.Status
+    config.DB.Save(&notif)
 
 	c.JSON(http.StatusOK, gin.H{"message": "Status reservasi diperbarui"})
 }
 
 // GetReservasiByStatus mengambil data reservasi berdasarkan status untuk dashboard admin
 func GetReservasiByStatus(c *gin.Context) {
-	status := c.Query("status")
-	if status != "menunggu" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Status tidak valid"})
-		return
-	}
+    status := c.Query("status")
+    var data []models.Reservasi
 
-	var reservasi []models.Reservasi // Menggunakan JadwalReservasi
-	if err := config.DB.Where("status = ?", status).Find(&reservasi).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
+    if err := config.DB.Where("status = ?", status).Find(&data).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
 
 	var result []ReservasiMenunggu
 	for _, r := range reservasi {
@@ -155,20 +136,15 @@ func GetReservasiByStatus(c *gin.Context) {
 
 // GetReservasiByUser mengambil data reservasi berdasarkan ID pengguna
 func GetReservasiByUser(c *gin.Context) {
-	idUserStr := c.Param("id_user")
-	idUser, err := strconv.Atoi(idUserStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "ID User tidak valid"})
-		return
-	}
+    idUser := c.Param("id_user")
+    var data []models.Reservasi
 
-	var reservasi []models.Reservasi // Ganti dengan struct yang benar dari package models
-	if err := config.DB.Where("id_user = ?", idUser).Find(&reservasi).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
+    if err := config.DB.Where("id_user = ?", idUser).Find(&data).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
 
-	c.JSON(http.StatusOK, reservasi)
+    c.JSON(http.StatusOK, data)
 }
 
 // SetujuiReservasi menyetujui reservasi
@@ -180,47 +156,45 @@ func SetujuiReservasi(c *gin.Context) {
 		return
 	}
 
-	var reservasi models.Reservasi // Menggunakan JadwalReservasi
-	if err := config.DB.First(&reservasi, idReservasi).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Reservasi tidak ditemukan"})
-		return
-	}
+  var reservasi models.Reservasi
+  if err := config.DB.First(&reservasi, idReservasi).Error; err != nil {
+   c.JSON(http.StatusNotFound, gin.H{"error": "Reservasi tidak ditemukan"})
+   return
+  }
 
 	reservasi.Status = "disetujui"
 	config.DB.Save(&reservasi)
 
-	// Update notifikasi
-	var notif models.Notifikasi
-	config.DB.Where("id_reservasi = ?", idReservasi).First(&notif)
-	notif.StatusReservasi = "disetujui"
-	config.DB.Save(&notif)
+  var notif models.Notifikasi
+  config.DB.Where("id_reservasi = ?", idReservasi).First(&notif)
+  notif.StatusReservasi = "disetujui"
+  config.DB.Save(&notif)
 
 	c.JSON(http.StatusOK, gin.H{"message": "Reservasi disetujui"})
 }
 
-// TolakReservasi menolak reservasi
-func TolakReservasi(c *gin.Context) {
-	idReservasiStr := c.Param("id_reservasi")
-	idReservasi, err := strconv.Atoi(idReservasiStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "ID Reservasi tidak valid"})
-		return
-	}
+ func TolakReservasi(c *gin.Context) {
+  idReservasiStr := c.Param("id_reservasi")
+  idReservasi, err := strconv.Atoi(idReservasiStr)
+  if err != nil {
+   c.JSON(http.StatusBadRequest, gin.H{"error": "ID Reservasi tidak valid"})
+   return
+  }
 
-	var reservasi models.Reservasi // Menggunakan JadwalReservasi
-	if err := config.DB.First(&reservasi, idReservasi).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Reservasi tidak ditemukan"})
-		return
-	}
+  var reservasi models.Reservasi
+  if err := config.DB.First(&reservasi, idReservasi).Error; err != nil {
+   c.JSON(http.StatusNotFound, gin.H{"error": "Reservasi tidak ditemukan"})
+   return
+  }
 
 	reservasi.Status = "ditolak"
 	config.DB.Save(&reservasi)
 
-	// Update notifikasi
-	var notif models.Notifikasi
-	config.DB.Where("id_reservasi = ?", idReservasi).First(&notif)
-	notif.StatusReservasi = "ditolak"
-	config.DB.Save(&notif)
+  // Update notifikasi (jika perlu)
+  var notif models.Notifikasi
+  config.DB.Where("id_reservasi = ?", idReservasi).First(&notif)
+  notif.StatusReservasi = "ditolak"
+  config.DB.Save(&notif)
 
 	c.JSON(http.StatusOK, gin.H{"message": "Reservasi ditolak"})
 }

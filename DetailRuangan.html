@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIRESA - Detail Ruangan</title>
     <style>
+        :root {
+            --warna-utama: #3f51b5;
+            --tombol-hover: #212f82;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -28,6 +33,48 @@
         .header h1 {
             font-size: 20px;
             font-weight: 500;
+        }
+
+        nav {
+            background-color: var(--warna-utama);
+            color: white;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .left, nav .right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+
+            font-size: 18px;
+        }
+
+        nav a {
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        nav button {
+            background-color: #6574c4;
+            border: none;
+            padding: 10px 40px;
+            border-radius: 9999px;
+            color: white;
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        nav button:hover {
+            background-color: var(--tombol-hover);
         }
         
         .user-button {
@@ -196,13 +243,108 @@
         .booking-button:hover {
             background-color: #344899;
         }
+
+
+        /* Style untuk pop-up */
+        .popup-container {
+            display: none; /* Sembunyikan secara default */
+            position: fixed; /* Tetap di posisi meskipun di-scroll */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+            justify-content: center; /* Tengah horizontal */
+            align-items: center; /* Tengah vertikal */
+            z-index: 1000; /* Pastikan di atas elemen lain */
+        }
+
+        .filter {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 400px; /* Sesuaikan lebar sesuai kebutuhan */
+        }
+
+        .filter h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .filter div {
+            margin-bottom: 10px;
+        }
+
+        .filter label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .filter input[type="date"],
+        .filter input[type="time"],
+        .filter input[type="number"],
+        .filter select {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Style untuk tombol pembuka pop-up (baru) */
+        .filter-button {
+            background-color: #4056b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            width: 100%;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .filter-button:hover {
+            background-color: #344899;
+        }
+
+        /* Style untuk tombol pembuka pop-up */
+        .open-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .open-button:hover {
+            background-color: #1e7e34;
+        }
+
+        
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>SIRESA - Detail Ruangan</h1>
-        <button class="user-button">Nama Pengguna</button>
-    </div>
+    <!-- Navbar -->
+    <nav>
+        <div class="left">
+            <!-- <img src="unsrii.png" alt="Logo" style="width: 40px; height: 40px;"> -->
+            <a href="#">SIRESA - Detail Ruangan</a>
+        </div>
+        <div class="right">
+            <a href="#">Home</a>
+            <a href="JadwalRuangan.html">Kalender</a>
+            <button id="nama-user">Wahyu Trisno Aji</button>
+        </div>
+    </nav>
     
     <div class="breadcrumb">
         <a href="Home4b.html">Beranda</a>
@@ -271,22 +413,50 @@
                 <div class="booking-section">
                     <h3>Pesan Ruangan Ini</h3>
                     <div class="booking-status">Status: Tersedia</div>
-                    <button class="booking-button" id="bookingBtn">Ajukan Peminjaman</button>
+                    <button class="filter-button">Ajukan Peminjaman</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="popupFilter" class="popup-container">
+        <div class="filter">
+            <h2>Form Peminjaman</h2>
+            <form id="filter-form">
+                <div>
+                    <label>Tanggal</label>
+                    <input type="date" value="2025-06-03" id="filter-tanggal">
+                </div>
+                <div>
+                    <label>Waktu Mulai</label>
+                    <input type="time" value="08:00" id="filter-jam-mulai">
+                </div>
+                <div>
+                    <label>Waktu Selesai</label>
+                    <input type="time" value="10:00" id="filter-jam-selesai">
+                </div>
+                <button type="submit" class="open-button"  id="cariRuanganBtn">Cari Ruangan</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('bookingBtn').addEventListener('click', function() {
-                alert('Permintaan peminjaman ruangan sedang diproses. Silakan tunggu konfirmasi.');
-            });
-            
-            document.querySelector('.user-button').addEventListener('click', function() {
-                alert('Menu pengguna akan ditampilkan di sini.');
-            });
+        const filterButton = document.querySelector('.filter-button'); // Targetkan tombol pembuka yang baru
+        const popupContainer = document.getElementById('popupFilter');
+
+        filterButton.addEventListener('click', () => {
+            popupContainer.style.display = 'flex'; // Tampilkan pop-up sebagai flex container
         });
+
+        // Anda bisa menambahkan logika untuk menutup pop-up jika diperlukan,
+        // misalnya dengan menambahkan tombol close di dalam pop-up atau
+        // menutupnya ketika area di luar pop-up diklik.
+        window.addEventListener('click', (event) => {
+            if (event.target === popupContainer) {
+                popupContainer.style.display = 'none';
+            }
+        });
+
     </script>
 
     <script>
@@ -306,7 +476,7 @@
                     // Pastikan struktur data sesuai dengan yang Anda kirim dari server
                     document.getElementById('room-name-header').textContent = `${room.nama_ruangan} - ${room.lokasi_gedung}`;
                     document.getElementById('room-name-breadcrumb').textContent = `Detail Ruangan ${room.nama_ruangan}`;
-                    document.getElementById('room-location').textContent = `${room.lantai} ${room.lokasi_gedung}`;
+                    document.getElementById('room-location').textContent = `Lantai ${room.lantai} ${room.lokasi_gedung}`;
                     document.getElementById('room-capacity').textContent = `${room.kapasitas} orang`;
                     document.getElementById('room-size').textContent = room.ukuran || 'Tidak Tersedia'; // Tambahkan penanganan jika properti tidak ada
                     document.getElementById('room-type').textContent = room.tipe || 'Tidak Tersedia';
@@ -340,13 +510,75 @@
                 mainContainer.innerHTML = '<p style="color: red;">ID ruangan tidak ditemukan dalam URL.</p>';
             }
 
-            document.getElementById('bookingBtn').addEventListener('click', function() {
-                alert('Permintaan peminjaman ruangan sedang diproses. Silakan tunggu konfirmasi untuk ruangan dengan ID: ' + roomId);
-                // Di sini Anda bisa menambahkan logika untuk mengirim permintaan peminjaman ke server
-            });
+            
+            // Ambil data pengguna dari localStorage
+            // Pastikan data ini sudah disimpan saat login
+            const username = localStorage.getItem('username');
+            const userId = localStorage.getItem('userId');
 
-            document.querySelector('.user-button').addEventListener('click', function() {
-                alert('Menu pengguna akan ditampilkan di sini.');
+            const namaUserButton = document.getElementById('nama-user');
+
+            if (username && userId) {
+                console.log('Selamat datang, ' + username + ' (ID: ' + userId + ')');
+                namaUserButton.textContent = username; // Set teks tombol dengan username
+            } else {
+                // Pengguna belum login atau data hilang, redirect ke halaman login
+                window.location.href = 'login.html';
+            }
+
+
+            // Formulir peminjaman
+            const cariRuanganBtn = document.getElementById('cariRuanganBtn');
+            const tanggalInput = document.getElementById('filter-tanggal');
+            const jamMulaiInput = document.getElementById('filter-jam-mulai');
+            const jamSelesaiInput = document.getElementById('filter-jam-selesai');
+            const formFilter = document.getElementById('filter-form');
+
+            formFilter.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const tanggal = tanggalInput.value;
+                const jamMulai = jamMulaiInput.value;
+                const jamSelesai = jamSelesaiInput.value;
+
+                const idRuangan = roomId; // Gunakan roomId yang didapatkan dari URL
+                const idUser = userId;   // Gunakan userId yang didapatkan dari localStorage
+
+                console.log('Room ID saat submit:', idRuangan);
+                console.log('User ID saat submit:', idUser);
+
+                const dataReservasi = {
+                    id_ruangan: parseInt(roomId), // Pastikan roomId adalah string angka sebelum di-parse
+                    id_user: parseInt(userId),   // Pastikan userId adalah string angka sebelum di-parse
+                    tanggal: tanggal,
+                    jam_mulai: jamMulai,
+                    jam_selesai: jamSelesai,
+                };
+
+                fetch('/reservasi/ajukan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataReservasi),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                    return response.json().then(errorData => {
+                        throw new Error('Gagal mengajukan reservasi: ' + errorData.error || response.statusText);
+                    });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Reservasi berhasil diajukan!');
+                    console.log('Success:', data);
+                    // Tambahkan logika setelah reservasi berhasil di sini
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert(error.message || 'Terjadi kesalahan saat mengajukan reservasi.');
+                });
             });
         });
     </script>
