@@ -25,9 +25,9 @@ func GetRingkasanSistem(c *gin.Context) {
 	config.DB.Model(&models.Reservasi{}).Where("status = ?", "ditolak").Count(&totalDitolak)
 
 	c.JSON(http.StatusOK, gin.H{
-		"permintaan_baru":  totalMenunggu,
-		"disetujui":      totalDisetujui,
-		"ditolak":        totalDitolak,
-		"total_ruangan":  totalRuangan,
+		"permintaan_baru": totalMenunggu,
+		"disetujui":       totalDisetujui,
+		"ditolak":         totalDitolak,
+		"total_ruangan":   totalRuangan,
 	})
 }
